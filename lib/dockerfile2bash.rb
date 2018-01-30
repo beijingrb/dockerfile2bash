@@ -1,7 +1,7 @@
 require 'json'
 
 class Dockerfile2bash
-  VERSION = '0.1.1'
+  VERSION = '0.1.2'
   attr_reader :commands
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
@@ -23,7 +23,7 @@ class Dockerfile2bash
       next if segments.length < 2 or !FIELDS.include?(segments[0].downcase)
 
       case segments[0].downcase!
-      when "from", "user", "run", "env", "expose", "copy", "add"
+      when "from", "user", "run", "expose", "copy", "add"
         @commands << { segments[0] => segments[1] }
       when "cmd"
         @commands << { "cmd" => (JSON.parse(segments[1]) || []).join(" ") }
@@ -31,6 +31,25 @@ class Dockerfile2bash
         args = segments[1].split("=", 2)
         if args.length == 2
           @commands << { "arg" => args }
+        end
+      when "env"
+        envs = segments[1].split
+        pattern = %r/^[a-zA-Z].[a-zA-Z0-9]+?=.+$/
+        case envs.length
+        when 1
+          @commands << { "env" => segments[1] }
+        when 2
+          if envs.all? { |e| e =~ pattern }
+            @commands << { "env" => segments[1] }
+          else
+            @commands << { "env" => envs.join("=") }
+          end
+        else
+          if envs.all? { |e| e =~ pattern }
+            @commands << { "env" => segments[1] }
+          else
+            @commands << { "env" => [envs[0], "\"#{envs[1..-1].join(" ")}\""].join("=") }
+          end
         end
       end
     end
@@ -51,7 +70,7 @@ class Dockerfile2bash
       when "env"
         env_str = "export " << cmd["env"]
         bash << env_str << "\n"
-        bash << "echo \"#{env_str}\" >> ~/.bashrc" << "\n"
+        bash << "echo \'#{env_str}\' >> ~/.bashrc" << "\n"
       end
     end
     bash
