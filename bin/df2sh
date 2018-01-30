@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'dockerfile2bash'
+
+puts <<USAGE if ARGV.length < 1
+df2sh is a command provided by Dockerfile2bash.
+
+Usage: df2sh <dockerfile_path> [output_bash_filename]
+
+"out.sh" will be used as output filename if the output_bash_filename is omitted.
+
+USAGE
+
+begin
+  parser = Dockerfile2bash.new(ARGV[0])
+  filename = File.join(Dir.pwd, ARGV[1]) if ARGV[1]
+  filename ||= "./out.sh"
+
+  parser.parse
+  script = parser.generate_bash
+  File.write(filename, script)
+  puts "success to convert a bash file: #{filename}"
+rescue
+  puts "convertion failed"
+end
