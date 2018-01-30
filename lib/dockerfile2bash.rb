@@ -63,7 +63,7 @@ class Dockerfile2bash
 
   def generate_bash()
     return unless @commands
-    bash = "#!/bin/bash \n\n# The script is generated from a Dockerfile via Dockerfile2bash(v#{VERSION})\n# By B1nj0y <idegorepl@gmail.com>\n\n"
+    bash = "#!/usr/bin/env bash \n\n# The script is generated from a Dockerfile via Dockerfile2bash(v#{VERSION})\n# By B1nj0y <idegorepl@gmail.com>\n\n"
     @commands.each do |cmd|
       case cmd.keys[0]
       when "from"
