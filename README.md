@@ -24,10 +24,8 @@ Or install it yourself as:
 require 'dockerfile2bash'
 
 parser = Dockerfile2bash.new(<your_Dockerfile_path>)
-# parse it at first
-parser.parse
-# you can check the parse results
-puts parser.commands
+# parse it at first and check the commands
+commands = parser.parse
 # then convert it to a Bash script
 puts parser.generate_bash
 ```

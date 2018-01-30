@@ -1,7 +1,7 @@
 require 'json'
 
 class Dockerfile2bash
-  VERSION = '0.1.0'
+  VERSION = '0.1.1'
   attr_reader :commands
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
@@ -34,6 +34,7 @@ class Dockerfile2bash
         end
       end
     end
+    @commands
   end
 
   def generate_bash()
