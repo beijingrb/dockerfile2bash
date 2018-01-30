@@ -1,25 +1,27 @@
 require 'json'
+require 'rest-client'
 
 class Dockerfile2bash
-  VERSION = '0.1.3'
+  VERSION = '0.1.4'
   attr_reader :commands
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
   def initialize(dockerfile)
     @dockerfile = dockerfile
-    @content = File.read(@dockerfile)
+    @content = get_content
     @commands = []
   end
 
   def parse
+    return unless @content || @content.empty?
     @content.gsub!("\\\n", "")
     lines = @content.split(/\r?\n+/) || []
 
-    lines.each do |ln|
+    lines.each do |line|
       # ignore blank and comment lines
-      next if /^\s*$/ =~ ln
-      next if /^\s*#/ =~ ln
-      segments = ln.split(" ", 2)
+      next if /^\s*$/ =~ line
+      next if /^\s*#/ =~ line
+      segments = line.split(" ", 2)
       next if segments.length < 2 or !FIELDS.include?(segments[0].downcase)
 
       case segments[0].downcase!
@@ -79,5 +81,19 @@ class Dockerfile2bash
       end
     end
     bash
+  end
+
+  def get_content
+    if @dockerfile =~ /^https:\/\/raw\.githubusercontent\.com\/.+$/
+      content = RestClient.get(@dockerfile)
+    elsif @dockerfile =~ /^https:\/\/github\.com\/(.+)$/
+      # convert to its corresponding raw url
+      url = "https://raw.githubusercontent.com/#{$1.sub('/blob/', '/')}"
+      content = RestClient.get(url)
+    else
+      # local file
+      content = File.read(@dockerfile)
+    end
+    content
   end
 end
