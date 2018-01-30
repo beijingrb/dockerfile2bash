@@ -1,4 +1,4 @@
-# Dockerfile2bash - Parse and Convert a Dockerfile to Bash script
+# Dockerfile2bash - Convert a Dockerfile to Bash
 
 `Dockerfile2bash` is used to parse a Dockerfile and convert it to a Bash script eventually. Maybe you can use it to convert massive Dockerfiles to shell scripts used in a metal installation.
 
