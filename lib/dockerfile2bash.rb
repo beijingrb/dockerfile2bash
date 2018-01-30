@@ -13,7 +13,7 @@ class Dockerfile2bash
   end
 
   def parse
-    return unless @content || @content.empty?
+    return if !@content || @content.empty?
     @content.gsub!("\\\n", "")
     lines = @content.split(/\r?\n+/) || []
 
@@ -22,7 +22,7 @@ class Dockerfile2bash
       next if /^\s*$/ =~ line
       next if /^\s*#/ =~ line
       segments = line.split(" ", 2)
-      next if segments.length < 2 or !FIELDS.include?(segments[0].downcase)
+      next if segments.length < 2 || !FIELDS.include?(segments[0].downcase)
 
       case segments[0].downcase!
       when "from", "user", "run", "expose", "copy", "add"
