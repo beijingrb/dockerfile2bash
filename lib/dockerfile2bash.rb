@@ -1,7 +1,7 @@
 require 'json'
 
 class Dockerfile2bash
-  VERSION = '0.1.2'
+  VERSION = '0.1.3'
   attr_reader :commands
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
