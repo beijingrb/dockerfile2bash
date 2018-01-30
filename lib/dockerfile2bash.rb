@@ -2,7 +2,7 @@ require 'json'
 require 'rest-client'
 
 class Dockerfile2bash
-  VERSION = '0.1.4'
+  VERSION = '0.1.5'
   attr_reader :commands
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
