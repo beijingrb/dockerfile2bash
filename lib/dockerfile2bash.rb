@@ -33,8 +33,13 @@ class Dockerfile2bash
           @commands << { "arg" => args }
         end
       when "env"
+        if segments[1] =~ /^[a-zA-Z_].[a-zA-Z0-9_]+?=("|')[^"']*?\1$/
+          @commands << { "env" => segments[1] }
+          next
+        end
+
         envs = segments[1].split
-        pattern = %r/^[a-zA-Z].[a-zA-Z0-9]+?=.+$/
+        pattern = %r/^[a-zA-Z_].[a-zA-Z0-9_]+?=.+$/
         case envs.length
         when 1
           @commands << { "env" => segments[1] }
