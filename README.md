@@ -40,7 +40,7 @@ df2sh /path/to/your/Dockerfile [output_bash_filename]
 
 `out.sh` will be used as output filename in current directory if the `output_bash_filename` is omitted.
 
-And here some example generated scripts: [examples](./examples).
+And here're some examples of generated scripts: [examples](./examples).
 
 ## Development
 
