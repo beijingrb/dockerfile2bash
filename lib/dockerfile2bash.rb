@@ -16,8 +16,7 @@ class Dockerfile2bash
 
   def parse
     return if !@content || @content.empty?
-    @content.gsub!("\\\n", "")
-    lines = @content.split(/\r?\n+/) || []
+    lines = @content.gsub("\\\n", "").split(/\r?\n+/) || []
 
     lines.each do |line|
       # ignore blank and comment lines
