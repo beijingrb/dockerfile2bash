@@ -5,7 +5,7 @@ class Dockerfile2bash
   attr_reader :commands
   attr_accessor :content
 
-  VERSION = '0.1.5'
+  VERSION = '0.1.6'
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
   def initialize(dockerfile)

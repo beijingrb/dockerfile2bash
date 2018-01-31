@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Dockerfile2bash::VERSION
   spec.authors       = ["B1nj0y"]
   spec.email         = ["idegorepl@gmail.com"]
-  spec.date          = '2018-01-30'
+  spec.date          = '2018-01-31'
   spec.summary       = %q{Parse and Convert a Dockerfile to Bash.}
   spec.description   = %q{The Gem can be used to parse and convert a Dockerfile to a Bash script.}
   spec.homepage      = "https://github.com/beijingrb/dockerfile2bash"
