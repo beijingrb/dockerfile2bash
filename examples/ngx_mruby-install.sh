@@ -1,6 +1,6 @@
-#!/bin/bash 
+#!/usr/bin/env bash 
 
-# The script is generated from a Dockerfile via Dockerfile2bash(v0.1.1)
+# The script is generated from a Dockerfile via Dockerfile2bash(v0.1.6)
 # By B1nj0y <idegorepl@gmail.com>
 
 # The original Dockerfile is from a base image: <ubuntu:14.04> 
