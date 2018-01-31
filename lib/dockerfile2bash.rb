@@ -2,8 +2,10 @@ require 'json'
 require 'rest-client'
 
 class Dockerfile2bash
-  VERSION = '0.1.5'
   attr_reader :commands
+  attr_accessor :content
+
+  VERSION = '0.1.5'
   FIELDS = %w(from user run add copy arg env expose cmd onbuild)
 
   def initialize(dockerfile)
