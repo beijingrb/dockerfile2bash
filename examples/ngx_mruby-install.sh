@@ -22,5 +22,5 @@ apt-get -y install libpcre3 libpcre3-dev
 apt-get -y install libmysqlclient-dev
 cd /usr/local/src/ && git clone https://github.com/matsumotory/ngx_mruby.git
 export NGINX_CONFIG_OPT_ENV="--with-http_stub_status_module --with-http_ssl_module --prefix=/usr/local/nginx --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module"
-echo 'export NGINX_CONFIG_OPT_ENV="--with-http_stub_status_module --with-http_ssl_module --prefix=/usr/local/nginx --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module"' >> ~/.bashrc
+echo "export NGINX_CONFIG_OPT_ENV=\"--with-http_stub_status_module --with-http_ssl_module --prefix=/usr/local/nginx --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module\"" >> ~/.bashrc
 cd /usr/local/src/ngx_mruby && sh build.sh && make install
