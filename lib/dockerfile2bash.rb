@@ -6,7 +6,7 @@ class Dockerfile2bash
   attr_accessor :content
 
   VERSION = '0.1.6'
-  FIELDS = %w(from user run add copy arg env expose cmd onbuild)
+  INSTRUCTIONS = %w(from user run add copy arg env expose cmd onbuild workdir entrypoint)
 
   def initialize(dockerfile)
     @dockerfile = dockerfile
@@ -23,13 +23,13 @@ class Dockerfile2bash
       next if /^\s*$/ =~ line
       next if /^\s*#/ =~ line
       segments = line.split(" ", 2)
-      next if segments.length < 2 || !FIELDS.include?(segments[0].downcase)
+      next if segments.length < 2 || !INSTRUCTIONS.include?(segments[0].downcase)
 
       case segments[0].downcase!
-      when "from", "user", "run", "expose", "copy", "add"
+      when "from", "user", "run", "expose", "copy", "add", "workdir"
         @commands << { segments[0] => segments[1] }
-      when "cmd"
-        @commands << { "cmd" => (JSON.parse(segments[1]) || []).join(" ") }
+      when "entrypoint", "cmd"
+        @commands << { segments[0] => JSON.parse(segments[1]) || [] }
       when "arg"
         args = segments[1].split("=", 2)
         if args.length == 2
@@ -78,7 +78,7 @@ class Dockerfile2bash
       when "env"
         env_str = "export " << cmd["env"]
         bash << env_str << "\n"
-        bash << "echo \'#{env_str}\' >> ~/.bashrc" << "\n"
+        bash << "echo #{env_str.inspect} >> ~/.bashrc" << "\n"
       end
     end
     bash
