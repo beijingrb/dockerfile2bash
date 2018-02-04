@@ -36,7 +36,7 @@ and note that you can take a `GitHub` url of a Dockerfile as a Dockerfile path. 
 require 'dockerfile2bash'
 
 parser = Dockerfile2bash.new("https://github.com/openresty/docker-openresty/blob/master/xenial/Dockerfile")
-# or its raw content url
+# or better its raw content url
 parser = Dockerfile2bash.new("https://raw.githubusercontent.com/openresty/docker-openresty/master/xenial/Dockerfile")
 # ...
 ```
