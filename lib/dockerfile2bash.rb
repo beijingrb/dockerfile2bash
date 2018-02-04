@@ -5,7 +5,7 @@ class Dockerfile2bash
   attr_reader :commands
   attr_accessor :content
 
-  VERSION = '0.1.6'
+  VERSION = '0.1.7'
   INSTRUCTIONS = %w(from user run add copy arg env expose cmd onbuild workdir entrypoint)
 
   def initialize(dockerfile)
