@@ -30,6 +30,17 @@ commands = parser.parse
 puts parser.generate_bash
 ```
 
+and note that you can take a `GitHub` url of a Dockerfile as a Dockerfile path. For example:
+
+```ruby
+require 'dockerfile2bash'
+
+parser = Dockerfile2bash.new("https://github.com/openresty/docker-openresty/blob/master/xenial/Dockerfile")
+# or its raw content url
+parser = Dockerfile2bash.new("https://raw.githubusercontent.com/openresty/docker-openresty/master/xenial/Dockerfile")
+# ...
+```
+
 ### Commandline tool
 
 A command named `df2sh` released with Dockerfile2bash. After installation the command will be available in your shell path.
