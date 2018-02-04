@@ -23,11 +23,11 @@ Or install it yourself as:
 ```ruby
 require 'dockerfile2bash'
 
-parser = Dockerfile2bash.new(<your_Dockerfile_path>)
+df = Dockerfile2bash.new(<your_Dockerfile_path>)
 # parse it at first and check the commands
-commands = parser.parse
+commands = df.parse
 # then convert it to a Bash script
-puts parser.generate_bash
+puts df.generate_bash
 ```
 
 and note that you can take a `GitHub` url of a Dockerfile as a Dockerfile path. For example:
@@ -35,9 +35,9 @@ and note that you can take a `GitHub` url of a Dockerfile as a Dockerfile path. 
 ```ruby
 require 'dockerfile2bash'
 
-parser = Dockerfile2bash.new("https://github.com/openresty/docker-openresty/blob/master/xenial/Dockerfile")
+df = Dockerfile2bash.new("https://github.com/openresty/docker-openresty/blob/master/xenial/Dockerfile")
 # or better its raw content url
-parser = Dockerfile2bash.new("https://raw.githubusercontent.com/openresty/docker-openresty/master/xenial/Dockerfile")
+df = Dockerfile2bash.new("https://raw.githubusercontent.com/openresty/docker-openresty/master/xenial/Dockerfile")
 # ...
 ```
 
