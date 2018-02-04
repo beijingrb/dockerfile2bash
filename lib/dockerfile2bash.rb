@@ -79,6 +79,8 @@ class Dockerfile2bash
         env_str = "export " << cmd["env"]
         bash << env_str << "\n"
         bash << "echo #{env_str.inspect} >> ~/.bashrc" << "\n"
+      when "user"
+        bash << "su - #{cmd['user']}" << "\n"
       end
     end
     bash
